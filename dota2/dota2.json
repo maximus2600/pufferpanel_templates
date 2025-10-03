@@ -1,0 +1,104 @@
+{
+    "type": "srcds",
+    "display": "Dota 2 (Docker)",
+    "data": {
+        "guard": {
+            "type": "string",
+            "value": "",
+            "display": "steam guard",
+            "required": true,
+            "userEdit": false
+        },
+        "ip": {
+            "type": "string",
+            "value": "0.0.0.0",
+            "display": "IP",
+            "desc": "What IP to bind the server to",
+            "required": true,
+            "userEdit": false
+        },
+        "map": {
+            "type": "string",
+            "value": "dota",
+            "display": "map",
+            "required": false,
+            "userEdit": false
+        },
+        "password": {
+            "type": "string",
+            "value": "",
+            "display": "steam password",
+            "required": true,
+            "userEdit": false
+        },
+        "port": {
+            "type": "integer",
+            "value": 27020,
+            "display": "port",
+            "required": true,
+            "userEdit": false
+        },
+        "user": {
+            "type": "string",
+            "value": "",
+            "display": "steam user",
+            "required": true,
+            "userEdit": false
+        }
+    },
+    "install": [
+        {
+            "type": "command",
+            "commands": [
+                "steamcmd +force_install_dir /pufferpanel +set_steam_guard_code ${guard} +login ${user} ${password} +app_update 570 +quit "
+            ]
+        }
+    ],
+    "uninstall": null,
+    "run": {
+        "command": "./game/bin/linuxsteamrt64/dota2 -dedicated -game dota +map ${map} +ip ${ip} +port ${port} ",
+        "stop": "exit",
+        "stdin": {
+            "type": "stdin"
+        },
+        "autostart": false,
+        "autorecover": false,
+        "autorestart": false
+    },
+    "environment": {
+        "type": "docker",
+        "networkName": "",
+        "portBindings": [
+            "0.0.0.0:${port}:${port}/tcp"
+        ],
+        "bindings": {},
+        "image": "steamcmd/steamcmd",
+        "networkMode": "host"
+    },
+    "supportedEnvironments": [
+        {
+            "type": "host"
+        },
+        {
+            "type": "docker",
+            "image": "pufferpanel/steamcmd",
+            "portBindings": [
+                "0.0.0.0:${port}:${port}/tcp"
+            ]
+        }
+    ],
+    "requirements": {
+        "arch": "amd64"
+    },
+    "stats": {
+        "type": ""
+    },
+    "query": {
+        "type": ""
+    },
+    "keepAlive": {
+        "frequency": "",
+        "command": ""
+    },
+    "name": "dota2_docker"
+}
