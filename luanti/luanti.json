@@ -1,0 +1,77 @@
+{
+    "type": "docker",
+    "display": "Luanti (Docker)",
+    "data": {
+        "gameid": {
+            "type": "string",
+            "value": "",
+            "display": "Game ID",
+            "desc": "The game type of Luanti",
+            "required": true,
+            "userEdit": false
+        },
+        "ip": {
+            "type": "string",
+            "value": "0.0.0.0",
+            "display": "IP",
+            "desc": "Sets the IP address for the server to listen on - 0.0.0.0 means every possible IP",
+            "required": true,
+            "userEdit": false
+        },
+        "port": {
+            "type": "integer",
+            "value": 7777,
+            "display": "Port",
+            "desc": "What port to bind the server to",
+            "required": true,
+            "userEdit": false
+        }
+    },
+    "install": [],
+    "uninstall": null,
+    "run": {
+        "command": "luantiserver --port ${port} --gameid ${gameid} --config /pufferpanel/minetest.conf --terminal",
+        "stop": "/stop",
+        "environmentVars": {
+            "MINETEST_USER_PATH": "/pufferpanel"
+        },
+        "workingDirectory": "/pufferpanel",
+        "stdin": {
+            "type": "stdin"
+        },
+        "autostart": false,
+        "autorecover": false,
+        "autorestart": false
+    },
+    "environment": {
+        "type": "docker",
+        "networkName": "host",
+        "portBindings": [
+            "0.0.0.0:${port}:${port}/udp"
+        ],
+        "bindings": {},
+        "containerRoot": "",
+        "image": "linuxserver/luanti"
+    },
+    "supportedEnvironments": [
+        {
+            "type": "docker",
+            "image": "linuxserver/luanti",
+            "portBindings": [
+                "0.0.0.0:${port}:${port}/udp"
+            ]
+        }
+    ],
+    "requirements": {},
+    "stats": {
+        "type": ""
+    },
+    "query": {
+        "type": ""
+    },
+    "keepAlive": {
+        "frequency": "",
+        "command": ""
+    },
+    "name": "luanti"
+}
