@@ -20,7 +20,7 @@
         },
         "port": {
             "type": "integer",
-            "value": 7777,
+            "value": 30010,
             "display": "Port",
             "desc": "What port to bind the server to",
             "required": true,
